@@ -12,7 +12,7 @@ def sort_line(line):
         credit_card_no = line[2]
         process(command, username, amount, credit_card_no)
     
-    print("{} {} to {}'s account".format(command,amount,username))
+    # print("{} {} to {}'s account".format(command,amount,username))
 
 
 def _direct_input(s_input):
