@@ -10,23 +10,31 @@ def sort_line(line):
 
     if command == 'Add':
         credit_card_no = line[2]
-        process(command, username, amount, credit_card_no)
+        res = process(command, username, amount, credit_card_no)
+    else:
+        res = process(command, username, amount)
     
+    return res
     # print("{} {} to {}'s account".format(command,amount,username))
 
 
 def _direct_input(s_input):
+    result = {}
     # if direct input
     for line in s_input:
-        sort_line(line)
+        trans_res = sort_line(line)
+        result.update(trans_res)
+    return result
 
 
 def _file(filename):
+    result = {}
     # if file name
     with open(filename, 'r') as file:
         for line in file:
-            sort_line(line)
-
+            trans_res = sort_line(line)
+            result.update(trans_res)
+        return result
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
