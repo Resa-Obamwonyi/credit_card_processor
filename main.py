@@ -1,45 +1,37 @@
 import sys
-from logic import process
 
 
-def sort_line(line):
+def sort_line(line, cache):
     line = line.split(" ")
     command = line[0]
     username = line[1]
-    amount = line[-1]
+    amount = int(line[-1].split('$')[-1])
 
     if command == 'Add':
         credit_card_no = line[2]
-        res = process(command, username, amount, credit_card_no)
+        account_details = [command, username, amount, cache, credit_card_no]
     else:
-        res = process(command, username, amount)
-    
-    return res
-    # print("{} {} to {}'s account".format(command,amount,username))
+        account_details = [command, username, amount, cache]
 
-
-def _direct_input(s_input):
-    result = {}
+ 
+def read_direct_input(s_input):
     # if direct input
     for line in s_input:
         trans_res = sort_line(line)
-        result.update(trans_res)
-    return result
+    return 
 
 
-def _file(filename):
-    result = {}
+def read_file(filename):
     # if file name
     with open(filename, 'r') as file:
         for line in file:
             trans_res = sort_line(line)
-            result.update(trans_res)
-        return result
+        return
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
        filename = sys.argv[1]
-       _file(filename)
+       read_file(filename)
     else:
-        _direct_input(sys.stdin)
+        read_direct_input(sys.stdin)
 
