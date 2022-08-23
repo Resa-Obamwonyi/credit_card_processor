@@ -1,7 +1,6 @@
 
 def luhn_validation(number):
     # validate the credit card numbers using luhn's algorithm
-    print(str(number))
     def digits_of(n):
         return [int(d) for d in str(n)]
 

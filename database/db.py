@@ -5,28 +5,43 @@ class AccountDB():
     def __init__(self):
         self._db = {}
         self.error = "error"
+        self.limit = 0
 
     def get_account(self, key):
-        pass
+        return self._db.get(key, None)
     
     def add_new_account(self, account_details):
+        """ Creates a new credit card for a given name, card number, and limit,
+        invalid cards get balance of 'error', else balance is set to $0 """
         pass
 
     def validate_acc_number(self, number):
+        """ validates that a credit card number follows luhn's algorithm """
         is_valid = luhn_validation(number)
         return is_valid
 
-    def validate_acc_exists(self, acc_name):
-        pass
+    def validate_acc_limit(self, key, amount):
+        """ Validates that a new charge transaction does not exceed account limit """
+        limit = self._db.get(key)["limit"]
+        balance = self._db.get(key)["balance"]
 
-    def validate_acc_limit(self, acc_name):
-        pass
+        if (amount + balance) > limit:
+            return False
+        else:
+            return True
     
-    def make_debit_transaction(self, account_details):
-        pass
+    def make_charge_transaction(self, name, amount):
+        """ Adds money to an account, ignore if it raises above limit, ignores if card is invalid """
+        account = self.get_account(name)
+        if account:
+            is_charge_valid = self.validate_acc_limit(name, amount)
+            if is_charge_valid:
+                account["balance"] = account["balance"] + amount
 
-    def make_credit_transaction(self, account_details):
+    def make_credit_transaction(self, name, amount):
+        """ Removes money from an account, balance can be negative, ignores if card is invalid """
         pass
 
     def generate_account_statement(self):
-        pass
+        for account in self._db:
+            print(f'{account["name"]}:${account["balance"]}')
