@@ -9,11 +9,11 @@ def sort_line(line, cache):
 
     if command == 'Add':
         credit_card_no = line[2]
-        account_details = [command, username, amount, cache, credit_card_no]
+        account_details = [command, username, amount, credit_card_no]
     else:
-        account_details = [command, username, amount, cache]
+        account_details = [command, username, amount]
 
- 
+
 def read_direct_input(s_input):
     # if direct input
     for line in s_input:

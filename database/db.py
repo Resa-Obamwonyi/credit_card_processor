@@ -10,10 +10,21 @@ class AccountDB():
     def get_account(self, key):
         return self._db.get(key, None)
     
-    def add_new_account(self, account_details):
+    def add_new_account(self, username, limit, credit_card_no):
         """ Creates a new credit card for a given name, card number, and limit,
         invalid cards get balance of 'error', else balance is set to $0 """
-        pass
+        account_num_valid = self.validate_acc_number(credit_card_no)
+        username = username.capitalize()
+        if account_num_valid:
+            self._db[username] = {"balance":0, 
+                                    "limit":limit,
+                                    "name": username,
+                                    "card_number": credit_card_no}
+        else:
+            self._db[username] = {"balance":self.error, 
+                                    "limit":self.limit,
+                                    "name": username,
+                                    "card_number": credit_card_no}
 
     def validate_acc_number(self, number):
         """ validates that a credit card number follows luhn's algorithm """
@@ -60,5 +71,7 @@ class AccountDB():
 
 
     def generate_account_statement(self):
-        for account in self._db:
+        ordered_db = dict(sorted(self._db.items()))
+        for account in ordered_db:
+            print(account)
             print(f'{account["name"]}:${account["balance"]}')
