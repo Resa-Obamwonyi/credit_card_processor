@@ -40,7 +40,7 @@ class AccountDB():
         limit = self._db.get(key)["limit"]
         balance = self._db.get(key)["balance"]
 
-        #check that balance is valid type
+        #check that balance is valid
         is_balance_valid = self.validate_balance(balance)
         if is_balance_valid:
             if (amount + balance) <= limit:
@@ -52,7 +52,7 @@ class AccountDB():
         account = self.get_account(name)
         if account:
             balance = account["balance"]
-            #check that balance is valid type
+            #check that balance is valid
             is_balance_valid = self.validate_balance(balance)
             if is_balance_valid:
                 is_charge_valid = self.validate_acc_limit(name, amount)
@@ -64,7 +64,7 @@ class AccountDB():
         account = self.get_account(name)
         if account:
             balance = account["balance"]
-            # check that balance is valid type
+            # check that balance is valid
             is_balance_valid = self.validate_balance(balance)
             if is_balance_valid:
                 account["balance"] = balance - amount
