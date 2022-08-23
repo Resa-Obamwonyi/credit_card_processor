@@ -13,3 +13,18 @@ def luhn_validation(number):
         checksum += sum(digits_of(d*2))
     
     return True if checksum % 10 == 0 else False
+
+def sort_line(line, db):
+    line = line.split(" ")
+    command = line[0]
+    username = line[1]
+    amount = int(line[-1].split('$')[-1])
+
+    if command == 'Add':
+        credit_card_no = line[2]
+        db.add_new_account(username, amount, credit_card_no)
+    elif command == 'Charge':
+        db.make_charge_transaction(username, amount)
+    else:
+        db.make_credit_transaction(username, amount)
+    

@@ -27,11 +27,12 @@ class AccountDB():
                                     "card_number": credit_card_no}
 
     def validate_acc_number(self, number):
-        """ validates that a credit card number follows luhn's algorithm """
+        """ Validates that a credit card number follows luhn's algorithm """
         is_valid = luhn_validation(number)
         return is_valid
 
     def validate_balance(self, balance):
+        """ Validates that the balance is an integer (a valid account)"""
         return True if type(balance) == int else False
 
 
@@ -70,8 +71,10 @@ class AccountDB():
                 account["balance"] = balance - amount
 
 
-    def generate_account_statement(self):
+    def generate_account_summary(self):
         ordered_db = dict(sorted(self._db.items()))
-        for account in ordered_db:
-            print(account)
-            print(f'{account["name"]}:${account["balance"]}')
+        account_summary = []
+        for account_name in ordered_db:
+            account = ordered_db[account_name]
+            account_summary.append(f'{account["name"]}:${account["balance"]}')
+        return account_summary
