@@ -76,5 +76,10 @@ class AccountDB():
         account_summary = []
         for account_name in ordered_db:
             account = ordered_db[account_name]
-            account_summary.append(f'{account["name"]}:${account["balance"]}')
+            is_balance_valid = self.validate_balance(self._db.get(account_name)["balance"])
+            if is_balance_valid:
+                account_summary.append(f'{account["name"]}: ${account["balance"]}')
+            else:
+                account_summary.append(f'{account["name"]}: {account["balance"]}')
+
         return account_summary
