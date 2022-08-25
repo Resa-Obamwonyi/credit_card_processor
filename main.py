@@ -26,6 +26,7 @@ def read_file(filename):
         print(line)
 
 if __name__ == "__main__":
+    # determine if file or direct input, and process accordingly
     if len(sys.argv) > 1:
        filename = sys.argv[1]
        read_file(filename)

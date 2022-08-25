@@ -3,6 +3,7 @@ from utils.logic import luhn_validation
 
 class AccountDB():
     def __init__(self):
+        # initialize base variables
         self._db = {}
         self.error = "error"
         self.limit = 0
@@ -72,11 +73,13 @@ class AccountDB():
 
 
     def generate_account_summary(self):
+        # sort the dictionary
         ordered_db = dict(sorted(self._db.items()))
         account_summary = []
         for account_name in ordered_db:
             account = ordered_db[account_name]
             is_balance_valid = self.validate_balance(self._db.get(account_name)["balance"])
+            # confirm that balance is numerical, append dollar sign
             if is_balance_valid:
                 account_summary.append(f'{account["name"]}: ${account["balance"]}')
             else:
