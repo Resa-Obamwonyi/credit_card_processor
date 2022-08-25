@@ -4,7 +4,7 @@ This program will add new credit card accounts, process charges and credits agai
 ## Design Descisions
 - A major design principle I attempted to communicate in this task is that "simple is better". I understood that since this was a standard read and write of input, there was no need for an actual database for long term storage. 
 - I proceeded to mimic a database model using python, this kept my logic simple, precise and clear.
-- I choose to use python because of the simplicity and accessibility it provides and because of my familiarity and comfort with the language.
+- I chose to use python because of the simplicity and accessibility it provides and because of my familiarity and comfort with the language.
 ### Technologies Used
 - Python 3 and a few of its inbuilt libraries.
 
